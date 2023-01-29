@@ -23,30 +23,30 @@ print(arr)
 
 "Question 2"
 
-2a
+"a)"
 l1 = [2, 5, 6, 4, 5, 9, 3, 2, 2]
 array = np.array(l1)
 array=array.reshape(3,3) # Reshape a new 3 * 3 2D matrix called A
 print('the new list into a 3 × 3 matrix', array)
 
-2b
+"b)"
 max = np.max(array) # Initialize the maximum value in matrix A
 max_position = np.argmax(array) # Initialize the position of the maximum value in matrix A
 print('the maximum of the matrix A', max,'the index of the maximum',max_position)
 
-2c
+"c)"
 transpose_a = np.transpose(array) # Transpose elements in units of each axis in the matrix A
 print('Transpose the matrixA', transpose_a)
 
-2d
+"d)"
 power_a = np.power(array,2) # Raise to the power all the elements in matrix A.
 print('Raise to the power all the elements in matrix A', power_a)
 
-2e
+"e)"
 eigenvalues = np.linalg.eig(array)[0] # Calculate the eigenvalue of matrix A
 print('Compute the eigenvalues of matrix A.', eigenvalues)
 
-2f
+"f)"
 f1 = np.zeros((3,3)) # Initialize a 3 * 3 zero matrix
 print('a matrix of zeros', f1)
 f2 = np.eye(3) # Initialize a 3 * 3 identity matrix
@@ -57,7 +57,7 @@ print('Multiply matrix A by a matrix of zeros', np.matmul(array, f1))
 print('Multiply matrix A by the identity matrix', np.matmul(array, f2))
 print('Multiply matrix A by a matrix of ones', np.matmul(array, f3))
 
-2g
+"g)"
 l2 = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 array2 = np.array(l2) # Reshape a 0-9 element list l2, and initialize l2 into a 3 * 3 matrix B
 array2=array2.reshape(3,3) # Multiply matrix A by matrix B
