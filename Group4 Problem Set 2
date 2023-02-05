@@ -1,3 +1,60 @@
+"Question 1"
+Exploring the data
+
+"a)"
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+#print(os.getcwd)
+#print("Test")
+
+df = pd.read_excel(r'C:\Users\HP\Desktop\thirdYearSecondSemester\program\week3\UNPS_1112_PS2.xls')
+df_duplicated=df.iloc[0:2613,0]== True
+# There is no duplicated household variable in the data. 0 repeated observations.
+
+"b)"
+df['head_gender'].mean() 
+pd.value_counts(df['head_gender'])
+#The top two rows show the basic statistics(mean and value) for head_gender.
+df['head_age'].mean()
+pd.value_counts(df['head_age'])
+#The top two rows show the basic statistics(mean and value) for head_age.
+df['familysize'].mean()
+pd.value_counts(df['familysize'])
+#The top two rows show the basic statistics(mean and value) for familysize.
+df['consumption'].mean()
+pd.value_counts(df['consumption'])
+#The top two rows show the basic statistics(mean and value) for consumption.
+df['income'].mean()
+pd.value_counts(df['income'])
+#The top two rows show the basic statistics(mean and value) for income.
+df['wealth'].mean()
+pd.value_counts(df['wealth'])
+#The top two rows show the basic statistics(mean and value) for wealth.
+df.isna().sum()
+# or df.count()
+df.describe()
+
+"c)"
+df['head_female'] = df['head_gender'].copy()
+df.loc[df['head_gender'] == 2, 'head_female'] = 1 #This step to difine 1=female.
+df.loc[df['head_gender'] == 1, 'head_female'] = 0 #This step to difine 0=male.
+print(df['head_female'])
+prop = df['head_female'].sum() / len(df)
+print(prop)
+
+"d)"
+b = df.groupby('head_female')
+male_group = gb.get_group(0)
+female_group = gb.get_group(1)
+consumption_df =  pd.DataFrame({'consumption': {'male': male_group['consumption'].mean(), 'female': female_group['consumption'].mean()}})
+consumption_df = consumption_df.transpose()
+# sns.barplot(data=consumption_df)
+familysize_df =  pd.DataFrame({'familysize': {'male': male_group['familysize'].mean(), 'female': female_group['familysize'].mean()}})
+familysize_df = familysize_df.transpose()
+# sns.barplot(data=familysize_df)
+
 "Question 2"
 import pandas as pd
 import seaborn as sns
