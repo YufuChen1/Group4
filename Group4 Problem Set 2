@@ -1,1 +1,28 @@
 
+"Question 3"
+import numpy as np
+import pandas as pd
+import seaborn as sns
+df = pd.read_excel(r'/Users/yufuchen/Desktop/UNPS_1112_PS2.xls')
+df = df[df['head_age'] < 80]
+df = df[df['head_age'] >18]
+bins = [18, 30, 40, 50, 60, 80]
+labels = [25, 35, 45, 55, 70]
+df['age_bins'] = pd.cut(df['head_age'],bins=bins, labels=labels)
+df['log_c'] = np.log10(df['consumption'])
+df['log_inc'] = np.log10(df['income'])
+df['log_w'] = np.log10(df['wealth'])
+log_c = df.loc[df['log_c']== 0]
+log_inc = df.loc[df['log_inc'] == 1]
+log_w = df.loc[df['log_w'] == 2]
+"a)"
+plt1 = sns.relplot(x='head_age', y='log_c', data=df, hue='head_gender', kind='line';
+"b)"
+plt2 = sns.relplot(x='head_age', y='log_w', data=df, hue='head_gender', kind='line');
+"c)"
+plt3 = sns.relplot(x='head_age', y='log_inc', data=df, hue='head_gender', kind='line');
+"d)"
+'It is obvious that male has higher consumption, wages and income than that of female at almost every age, all three of them have an inverted u shaped trend as age increases.'
+
+
+
