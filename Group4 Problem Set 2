@@ -1,3 +1,103 @@
+"Question 2"
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_excel('drive/MyDrive/UNPS_1112_PS2.xls')
+df
+
+"a)"
+df['log_c'] = np.log(df['consumption'])
+df['log_inc'] = np.log(df['income'])
+df['log_w'] = np.log(df['wealth'])
+df
+
+fig, ax = plt.subplots(1, 2)
+sns.histplot(data=df['log_c'], ax=ax[0])
+sns.histplot(data=df['log_inc'], ax=ax[1])
+plt.subplots_adjust(wspace=0.5)
+
+"b)"
+
+var_log_c = df['log_c'].var()
+var_log_inc = df['log_inc'].var()
+
+df_logw = df[df['log_w'] > 0] # Remove NaN
+var_log_w = df_logw['log_w'].var()
+print('var_log_c: ', var_log_c)
+print('var_log_inc: ', var_log_inc)
+print('var_log_w: ', var_log_w)
+print('Compare with the paper: In the comparison between Uganda and the United States, the consumption variance of the two countries is not significantly different, but Uganda is much larger than the United States in terms of income variance and weath variance')
+
+"c)"
+groups = df.groupby(by='urban')
+
+rural = groups.get_group(0)
+ave_comsumption = rural['consumption'].mean()
+ave_income = rural['income'].mean()
+ave_wealth = rural['wealth'].mean()
+print('The average of consumption is', ave_comsumption, 
+      'The average of income is', ave_income, 
+      'The average of wealth is', ave_wealth)
+
+urban = groups.get_group(1)
+ave_comsumption = urban['consumption'].mean()
+ave_income = urban['income'].mean()
+ave_wealth = urban['wealth'].mean()
+print('The average of consumption is', ave_comsumption, 'The average of income is', ave_income, 'The average of wealth is', ave_wealth)
+
+"d)"
+var_log_c = rural['log_c'].var()
+var_log_inc = rural['log_inc'].var()
+
+rural_logw = rural[rural['log_w'] > 0] # Remove NaN
+var_log_w = rural_logw['log_w'].var()
+print('var_log_c: ', var_log_c)
+print('var_log_inc: ', var_log_inc)
+print('var_log_w: ', var_log_w)
+
+var_log_c = urban['log_c'].var()
+var_log_inc = urban['log_inc'].var()
+
+urban_logw = urban[urban['log_w'] > 0] # Remove NaN
+var_log_w = urban_logw['log_w'].var()
+print('var_log_c: ', var_log_c)
+print('var_log_inc: ', var_log_inc)
+print('var_log_w: ', var_log_w)
+
+"e)"
+def gini(x):
+  total=0
+  for i, xi in enumerate(x[:-1],1): total += np.sum(np.abs(xi-x[i:]))
+  return total/(len(x))**2 * np.mean(x)
+x_consumption=df['consumption']
+x_income=df['income']
+x_weath=df['weath']
+gini_consumption = gini(x_consumption)
+gini_income = gini(x_income)
+gini_weath = gini(x_weath)
+
+"f)"
+df['wealth'].nsmallest(int(len(df)*0.5)).sum() / df['wealth'].sum() # bottom 50%
+
+df['wealth'].nlargest(int(len(df)*0.1)).sum() / df['wealth'].sum() # top 10%
+
+df['wealth'].nlargest(int(len(df)*0.05)).sum() / df['wealth'].sum() # top 5%
+
+df['wealth'].nlargest(int(len(df)*0.01)).sum() / df['wealth'].sum() # top 1%
+
+"g)"
+print('From our survey, we can find that the inequality in Uganda must be serious, because we can see that the distribution of consumer groups in Uganda has great defects, 
+and high wealth and consumption are often concentrated in a small number of people.')
+print('I think we should pay attention to these low-income countries with inequality. As the world economy moves towards integration, 
+human beings should more support and help the surrounding countries in a large group.')
+
+"h)"
+print('In general, they underestimated the income inequality in Africa. Compare with the paper. 
+In comparison, the United States is a relatively equal country. But in the exercise, we found that there is a small gap between Uganda and the United States in consumption variance. 
+But this is not the case. The consumer population in the United States is more average, 
+while the consumption in Uganda is reflected in the fact that wealth is in the hands of a very few people.')
 
 "Question 3"
 import numpy as np
