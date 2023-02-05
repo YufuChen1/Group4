@@ -5,13 +5,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 df = pd.read_excel('drive/MyDrive/UNPS_1112_PS2.xls')
-df
 
 "a)"
 df['log_c'] = np.log(df['consumption'])
 df['log_inc'] = np.log(df['income'])
 df['log_w'] = np.log(df['wealth'])
-df
 
 fig, ax = plt.subplots(1, 2)
 sns.histplot(data=df['log_c'], ax=ax[0])
