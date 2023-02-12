@@ -1,0 +1,106 @@
+"Question 1"
+
+"Question 2"
+"a)"
+import numpy as np
+import matplotlib.pyplot as plt
+
+def ar1(rho, sigma, y0, T):
+    y = np.empty(T)
+    y[0] = y0
+    for t in range(1, T):
+        y[t] = rho * y[t-1] + np.random.normal(0, sigma**2)
+    return y
+
+T = 50
+rho = 0.95
+sigma = 0.25
+y0 = 0
+y = ar1(rho, sigma, y0, T)
+
+plt.plot(y)
+plt.xlabel("t")
+plt.ylabel("y")
+plt.show()
+
+"b)"
+def ar1(N, rho, sigma, y0, T):
+    y = np.empty(N, T)
+    for i in range(N):
+      y[i, 0] = y0
+      for t in range(1, T):
+        y[t] = rho * y[t-1] + np.random.normal(0, sigma**2)
+    return y
+
+
+"c)"
+def ar1(N, T, rho, sigma, y0):
+    y = np.empty((N, T))
+    for i in range(N):
+        y[i, 0] = y0
+        for t in range(1, T):
+         y[i, t] = rho * y[i, t-1] + np.random.normal(0, sigma**2)
+    return y
+N = 5
+
+y = ar1(N, T, rho, sigma, y0)
+
+N = 5
+for i in range(N):
+    plt.plot(y[i,:])
+
+
+N = 5
+T = 50
+rho = 0.95
+sigma = 0.25
+y0 = 0
+
+plt.xlabel("t")
+plt.ylabel("y")
+plt.show()
+
+"d)"
+def ar1(N, T, rho, sigma, y0):
+    y = np.empty((N, T))
+    for i in range(N):
+        y[i, 0] = y0
+        for T in range(1, T):
+         y[i, T] = rho * y[i, T-1] + np.random.normal(0, sigma**2)
+    return y
+N = 10000
+T = 1000
+y = ar1(N, T, rho, sigma, y0)
+
+N = 10000
+T = 1000
+for i in range(N):
+    plt.plot(y[i,:])
+
+
+N = 10000
+T = 1000
+rho = 0.95
+sigma = 0.25
+y0 = 0
+
+plt.xlabel("t")
+plt.ylabel("y")
+plt.show()
+"Variance of Y"
+N = 10000
+T = 1000
+def ar1(N, T, rho, sigma, y0):
+    y = np.empty((N, T))
+    for i in range(N):
+        y[i, 0] = y0
+        for T in range(1, T):
+         y[i, T] = rho * y[i, T-1] + np.random.normal(0, sigma**2)
+
+rho = 0.95
+sigma = 0.25
+y0 = 0
+var_log_y = np.var(y)
+print(var_log_y)
+
+"Question 3"
