@@ -104,3 +104,77 @@ var_log_y = np.var(y)
 print(var_log_y)
 
 "Question 3"
+import pandas as pd
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+
+"a)"
+bs = []
+for _ in range(100000):
+  b = np.random.binomial(n=4, p=0.5)
+  bs.append(b)
+sns.countplot(bs)
+
+"b)"
+ps = [0] * 1000 # asusme the maximum is 100
+for _ in range(100000):
+  p = np.random.poisson(lam=2)
+  g = p ** 2
+  ps[g] +=1
+
+ps = np.array(ps)
+prob = ps / ps.sum()
+expect = 0
+for i in range(ps.shape[0]):
+  expect += i * prob[i]
+print('Since g(E[X]) is 4, the expection we get is', str(expect)[:4], '. We can conclude they are not equal.')
+sns.countplot(ps)
+
+"Question 4"
+
+"a)"
+def gini(x):
+  total = 0
+  for i, xi in enumerate(x[:-1], 1):
+    total += np.sum(np.abs(xi - x[i:]))
+  return total / (len(x) ** 2 * np.mean(x))
+
+def y_dist():
+  sigma = 0.8
+  mu = 7.5
+  log_y = np.random.normal() * sigma + mu # reparameterise
+  y = 2 ** log_y
+  return y
+
+y_sim = []
+for _ in range(100000):
+  y_sim.append(y_dist())
+
+y_sim = np.array(y_sim)
+print('mean', y_sim.mean())
+print('var', y_sim.var())
+print('gini', gini(y_sim) )
+
+"b)"
+def c_dist():
+  y = y_dist()
+  c = y ** 0.8 + 0.5 * y + 500
+  return c
+c_sim = []
+for _ in range(100000):
+c_sim.append(c_dist())
+c_sim = np.array(c_sim)
+print('gini', gini(c_sim))
+print('mean', c_sim.mean())
+print('var', c_sim.var())
+
+"c)"
+y_df = pd.DataFrame(y_sim)
+c_df = pd.DataFrame(c_sim)
+df = c_df.append(y_df)
+df['variable'] = 'y_sim'
+df['variable'][100000:] = 'c_sim' 
+df.columns = ['sim', 'variable']
+df = df.reset_index()
+sns.histplot(data=df, x='sim', hue='variable')
