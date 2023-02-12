@@ -1,4 +1,92 @@
 "Question 1"
+a）
+# import all the libraries needed
+import numpy as np
+import seaborn as sns
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+
+# set N to be 1000 or 10000 and the step to be 100
+N= 10000
+step = 100
+
+# numberIndex is to control the iteration from 0 to N
+numberIndex = 0
+
+# the list const[] to restore beta0, x1[] to restore beta1
+const = []
+x1 = []
+
+# while loop for iteration
+while numberIndex < N:
+    sigma_e = 5
+
+# generate a list of random numbers which obey the normal distribution
+    x2 = np.random.normal(0,1,step)
+    e = np.random.normal(0,sigma_e,step)
+
+    y1 = 2 + 0.5*x2 + e
+
+# do the ols and store the beta0 and beta1 in const[] and x1[] separatedly
+    X = sm.add_constant(x2)
+    ols1 = sm.OLS(y1,X).fit()
+    const.append(ols1.params[0])
+    x1.append(ols1.params[1])
+    numberIndex += step
+
+# use the kdeplot of seaborn to draw density figure
+sns.kdeplot(const)
+sns.kdeplot(x1)
+
+# use plt.show() to show the figure
+plt.show()
+print(ols1.summary())
+
+b）
+# import all the libraries needed
+import numpy as np
+import seaborn as sns
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+
+# set N to be 1000 or 10000 and the step to be 100
+N= 1000
+step = 100
+
+# numberIndex is to control the iteration from 0 to N
+numberIndex = 0
+
+# the list const[] to restore beta0, x1[] to restore beta1
+const = []
+x1 = []
+
+# while loop for iteration
+while numberIndex < N:
+    sigma_e = 5
+
+# generate a list of random numbers which obey the normal distribution
+    x2 = np.random.normal(0,1,step)
+    e = np.random.normal(0,sigma_e,step)
+
+    y1 = 2 + 0.5*x2 + e
+
+# do the ols and store the beta0 and beta1 in const[] and x1[] separatedly
+    X = sm.add_constant(x2)
+    ols1 = sm.OLS(y1,X).fit()
+    const.append(ols1.params[0])
+    x1.append(ols1.params[1])
+    numberIndex += step
+
+# use the kdeplot of seaborn to draw density figure
+sns.kdeplot(const)
+sns.kdeplot(x1)
+
+# use plt.show() to show the figure
+plt.show()
+print(ols1.summary())
+
+
+
 
 "Question 2"
 "a)"
